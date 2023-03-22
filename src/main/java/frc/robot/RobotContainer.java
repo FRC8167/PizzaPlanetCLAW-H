@@ -13,6 +13,7 @@ import frc.robot.commands.ManualExtend;
 import frc.robot.commands.ManualPivotDown;
 import frc.robot.commands.ManualPivotUp;
 import frc.robot.commands.ManualRetract;
+import frc.robot.commands.MiddleTest;
 // import frc.robot.commands.ManualExtend;
 // import frc.robot.commands.ManualPivotDown;
 // import frc.robot.commands.ManualPivotUp;
@@ -76,6 +77,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
   private final Arm arm = new Arm();
+  
   private final Pivot pivot = new Pivot();
   private final Grabber grabber = new Grabber();
   private final Vision vision = new Vision();
@@ -97,6 +99,7 @@ public class RobotContainer {
     SmartDashboard.putData(autoCommandSelector);
     SmartDashboard.putNumber("arm_pos", arm.getArmPosition());
     SmartDashboard.putNumber("pivot_pos", pivot.getPivotPosition());
+    SmartDashboard.putData(arm);
 
 
     drivetrain.setDefaultCommand(new ArcadeDrive(
@@ -174,9 +177,9 @@ public class RobotContainer {
     //extremeController.button(4).onFalse(new InstantCommand(() -> arm.stop()));
     //MANUAL CONTROL:  LOWER/RAISE PIVOT ARM
     extremeController.button(5).whileTrue(new ManualPivotDown(pivot, -Constants.PIVOT_POWER));
-    extremeController.button(5).onFalse(new InstantCommand(() -> pivot.stop()));
+    //extremeController.button(5).onFalse(new InstantCommand(() -> pivot.stop()));
     extremeController.button(6).whileTrue(new ManualPivotUp(pivot, Constants.PIVOT_POWER));
-    extremeController.button(6).onFalse(new InstantCommand(() -> arm.stop()));  
+    //extremeController.button(6).onFalse(new InstantCommand(() -> arm.stop()));  
     //MANUALLY ZERO ARM AND PIVOT SENSORS
     //new JoystickButton(extremeController, 2).onTrue(
     extremeController.button(12).onTrue(
@@ -189,9 +192,13 @@ public class RobotContainer {
     //PRESETS
     extremeController.button(7).onTrue(new InstantCommand(() -> arm.toggleGamepiece()));
     extremeController.button(8).onTrue(new NestArmPivot(pivot, arm));
-    extremeController.button(9).onTrue(new PositionMiddle(arm, pivot, grabber));
-    extremeController.button(10).onTrue((new PositionHigh(arm, pivot, grabber, arm.gamepiece)));
+    //extremeController.button(9).onTrue(new MiddleTest(arm, pivot));
+    extremeController.button(10).onTrue(new NestArmPivot(pivot, arm));
     extremeController.button(11).onTrue(new PositionLow(arm, pivot, grabber));
+    extremeController.button(9).onTrue(new ParallelCommandGroup(
+      new SetPivotAngle(pivot, 30),
+      new SetArmDistance(arm, 20)
+    ));
 
   
     

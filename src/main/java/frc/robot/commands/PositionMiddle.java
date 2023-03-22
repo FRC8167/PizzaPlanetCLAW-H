@@ -21,8 +21,8 @@ public class PositionMiddle extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SetPivotAngle(pivot, 45)
-      //new SetArmDistance(arm, 0)
+      new SetPivotAngle(pivot, 45),
+      new SetArmDistance(arm, 0)
     );
   }
 }

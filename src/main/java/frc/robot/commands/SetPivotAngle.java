@@ -40,8 +40,8 @@ public class SetPivotAngle extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
-    // pivot.stop();
+  
+     //pivot.stop();
   }
 
   private boolean isPivotMotionMagicDone() {
@@ -70,9 +70,9 @@ public class SetPivotAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean isPivotMotionDone = isPivotMotionMagicDone();
-    SmartDashboard.putBoolean("PMM Done",isPivotMotionDone);
-    return isPivotMotionDone;
-    // return false;
+    // boolean isPivotMotionDone = isPivotMotionMagicDone();
+    // SmartDashboard.putBoolean("PMM Done",isPivotMotionDone);
+    // return isPivotMotionDone;
+    return true;
   }
 }

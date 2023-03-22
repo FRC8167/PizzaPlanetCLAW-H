@@ -88,10 +88,10 @@ public class Pivot extends SubsystemBase {
 
     public void testPivot(double power) {
       if (power > 0 && upperRotationAllowed)  {
-        pivotMotor.set(ControlMode.PercentOutput, RobotContainer.extremeController.getRawAxis(3) * power);  
+        pivotMotor.set(ControlMode.PercentOutput, power);  
         motion = motionState.UP;
       }  else if (power < 0 && lowerRotationAllowed)  {
-        pivotMotor.set(ControlMode.PercentOutput, RobotContainer.extremeController.getRawAxis(3) * power);  
+        pivotMotor.set(ControlMode.PercentOutput, power);  
         motion = motionState.DOWN;
       } else  {
         stop();
@@ -189,14 +189,14 @@ public class Pivot extends SubsystemBase {
   @Override
   public void periodic() {
     currentAngle = angleSensor.get();
-    switch (motion) {
-      case UP:  if (UpperLimitExceeded()) stop();
-      case DOWN: if (LowerLimitExceeded()) stop();
-      case STATIONARY: stop();
-    }
+    // switch (motion) {
+    //   case UP:  if (UpperLimitExceeded()) stop();
+    //   case DOWN: if (LowerLimitExceeded()) stop();
+    //   case STATIONARY: stop();
+    // }
 
-    UpperLimitExceeded();
-    LowerLimitExceeded();
+    // UpperLimitExceeded();
+    // LowerLimitExceeded();
     SmartDashboard.putNumber("Pivot Encoder Position", getPivotPosition());
     
     //SmartDashboard.putNumber("Pivot Motor Current", pdm.getCurrent();

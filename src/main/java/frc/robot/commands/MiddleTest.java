@@ -4,28 +4,23 @@
 
 package frc.robot.commands;
 
-//import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.Arm;
-// import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Pivot;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class NestArmPivot extends SequentialCommandGroup {
-  // Grabber grabber;
-  Pivot pivot;
+public class MiddleTest extends ParallelCommandGroup {
+  /** Creates a new MiddleTest. */
   Arm arm;
-  /** Creates a new NestArmPivot */
-  public NestArmPivot(Pivot pivot, Arm arm) {
+  Pivot pivot;
+  public MiddleTest(Arm arm, Pivot pivot) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      // new InstantCommand(() -> grabber.toggle()),
-      new SetArmDistance(arm, 1),//Constants.ARM_FULLY_RETRACTED_0),
-      new SetPivotAngle(pivot, 5)//Constants.PIVOT_ANGLE_START_0)
+      new SetPivotAngle(pivot, 45),
+      new SetArmDistance(arm, 10)
     );
   }
 }
